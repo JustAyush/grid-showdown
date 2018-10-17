@@ -1,5 +1,5 @@
 var rows, cols;
-var w = 40;
+var w = 80;
 var grid = [];
 var gridScore = [];
 var score = 0;
@@ -14,6 +14,11 @@ a = b = c = d = p = false;
 var playerturn = 0;
 var p1 = 0;
 var p2 = 0;
+
+var scorecard, p1Score, p2Score, stbutton, msgPlayer;
+var ps = 0;
+var ps1 = true;
+var ps2 = false;
 
 function setup() {
   createCanvas(400, 400);
@@ -60,31 +65,46 @@ function setup() {
     grid[i].show();
   }
 
+  scorecard = select('.scorecard');
+  scorecard.position(0.8 * windowWidth, height/4);
 
+  p1Score = select('#p1Score');
+  p2Score = select('#p2Score');
+  stbutton = select('#start');
+  msgPlayer = select('#msgPlayer');
+
+  p1Score.html('Player1 : ' + score1);
+  p2Score.html('Player2 : ' + score2);
+  stbutton.position(0.8 * windowWidth, height/2);
+  msgPlayer.position(0.8 * windowWidth, 0.8 * windowHeight);
 }
 
 
 function draw() {
-
-
-
+  if(ps>=0){
+    if(ps == 1){
+      ps1 = !ps1;
+      ps2 = !ps2;
+    }
+    ps = 0;
+  }
+  if(ps1)
+    msgPlayer.html('Player 2 turn');
+  if(ps2)
+    msgPlayer.html('Player 1 turn');
 }
 
 
-function mousePressed() {
+function mousePressed(){
 
   for (let i = 0; i < grid.length; i++) {
     if (grid[i].showBolder()) {
 
       playerturn++;
       if (playerturn == 2) {
-        
+        ps++;
         playerturn = 0;
-        // if (player1)
-        //   console.log("Player1 turn");
-        // if (player2)
-        //   console.log("Player2 turn");
-          
+
         if(p1 == 0 && p2 == 0){
         	player1 = !player1;
         	player2 = !player2;
@@ -93,43 +113,43 @@ function mousePressed() {
             player1 = true;
         		player2 = false;
           	p1 = 0;
-        	} 
-        
+        	}
+
         	if(p2>0){
             player1 = false;
         		player2 = true;
           	p2 = 0;
        	 	}
         }
-        
+
         for (let i = (gridScore.length - 1); i >= 0; i--) {
           if (gridScore[i].IsEnclosed(player1, player2)) {
+            ps++;
             if (player1 == true && player2 == false){
               score1++;
               player1 = true;
               player2 = false;
   						p1++;
+              p1Score.html('Player1 : ' + score1);
             }
         	if (player2 == true && player1 == false){
               score2++;
             	player1 = false;
             	player2 = true;
             	p2++;
+              p2Score.html('Player2 : ' + score2);
             }
           gridScore.splice(i, 1);
-          print("Score1: " + score1 + "  Score2: " + score2);
-
-          } 
-             
+          // if(gridScore.length <= 16){
+          //   reset();
+          //   }
+          }
       	}
-        
-      }
 
-      
+      }
 
     }
   }
-
 }
 
 
@@ -147,4 +167,21 @@ function onTheLine(x1, y1, x2, y2) {
     return true;
   }
   return false;
+}
+
+
+function reset(){
+  clear();
+  createCanvas(400, 400);
+  background(220);
+  for(let i=0; i<grid.length; i++){
+    grid[i].reset();
+    grid[i].show();
+  }
+  gridScore = grid.slice(0, grid.length);
+  score1 = 0;
+  score2 = 0;
+  p1Score.html('Player1 : ' + score1);
+  p2Score.html('Player2 : ' + score2);
+
 }

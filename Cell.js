@@ -5,7 +5,6 @@ class Cell {
     this.w = w;
     this.x = this.i * this.w;
     this.y = this.j * this.w;
-    this.walls = [true, true, true, true];
     this.line = [false, false, false, false];
     this.a = a;
     this.b = b;
@@ -41,7 +40,7 @@ class Cell {
   }
 
   showBolder() {
-
+    var madeBold = false;
     if (this.a || this.b || this.c || this.d) {
       if (this.a) {
         if (onTheLine(this.x + this.w, this.y + this.w, this.x, this.y + this.w)) {
@@ -69,7 +68,6 @@ class Cell {
       }
 
     } else {
-      var madeBold = false;
       if (onTheLine(this.x, this.y, this.x + this.w, this.y)) {
         this.line[0] = true;
         madeBold = true;
@@ -107,5 +105,9 @@ class Cell {
     return false;
   }
 
+
+  reset(){
+    this.line = [false, false, false, false];
+  }
 
 }

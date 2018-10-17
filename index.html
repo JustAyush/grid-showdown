@@ -1,15 +1,26 @@
-<!DOCTYPE html><html><head>
-    <script src="libraries/p5.min.js"></script>
-    <script src="libraries/p5.dom.min.js"></script>
-    <script src="libraries/p5.sound.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <meta charset="utf-8">
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="libraries/p5.min.js"></script>
+  <script src="libraries/p5.dom.min.js"></script>
+  <script src="libraries/p5.sound.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8">
+  <script src="sketch.js"></script>
+  <script src="Cell.js"> </script>
+</head>
 
-    <script src="Cell.js"> </script>
+<body>
+  <div class="scorecard">
+    <p id="p1Score"> </p>
+    <p id="p2Score"> </p>
+  </div>
 
-  </head>
-  <body>
-    <script src="sketch.js"></script>
+  <button id="start" onclick="reset();"> Start </button>
+  <p id="msgPlayer"> </p>
 
 
-</body></html>
+
+
+</body>
+</html>
