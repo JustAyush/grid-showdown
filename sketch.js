@@ -1,8 +1,9 @@
 var rows, cols;
-var w = 80;
+var w = 60;
 var grid = [];
 var gridScore = [];
 var score = 0;
+var canvas;
 
 var player1 = true;
 var player2 = false;
@@ -15,14 +16,18 @@ var playerturn = 0;
 var p1 = 0;
 var p2 = 0;
 
-var scorecard, p1Score, p2Score, stbutton, msgPlayer;
+var scorecard, p1Score, p2Score, msgPlayer, playerSelect, winningmsg;
 var ps = 0;
 var ps1 = true;
 var ps2 = false;
 
+
 function setup() {
-  createCanvas(400, 400);
-  background(220);
+  canvas = createCanvas(0.6 * windowWidth, 0.94 * windowHeight);
+  background(251, 238, 193);
+
+  canvas.position(10, 0.16 * windowHeight);
+  canvas.style('border-radius: 35px;');
 
   rows = floor((height) / w);
   cols = floor((width) / w);
@@ -66,17 +71,18 @@ function setup() {
   }
 
   scorecard = select('.scorecard');
-  scorecard.position(0.8 * windowWidth, height/4);
+  scorecard.position(0.64 * windowWidth, 0.6 * height);
 
   p1Score = select('#p1Score');
   p2Score = select('#p2Score');
-  stbutton = select('#start');
   msgPlayer = select('#msgPlayer');
+  playerSelect = select('.playerSelect');
+  winningmsg = select('#winningmsg');
 
   p1Score.html('Player1 : ' + score1);
   p2Score.html('Player2 : ' + score2);
-  stbutton.position(0.8 * windowWidth, height/2);
-  msgPlayer.position(0.8 * windowWidth, 0.8 * windowHeight);
+  playerSelect.position(0.64 * windowWidth, 0.2 * windowHeight);
+
 }
 
 
@@ -140,9 +146,15 @@ function mousePressed(){
               p2Score.html('Player2 : ' + score2);
             }
           gridScore.splice(i, 1);
-          // if(gridScore.length <= 16){
-          //   reset();
-          //   }
+          if(gridScore.length <= (cols*2 + rows*2 - 4)){
+            $('#myModal2').modal('show');
+            if(score1 > score2)
+              winningmsg.html("Player1 is the winner <br> Congrats!!");
+            else if(score2 > score1)
+              winningmsg.html("Player2 is the winner <br> Congrats!!");
+            else
+              winningmsg.html("Its a draw");
+           }
           }
       	}
 
@@ -172,8 +184,8 @@ function onTheLine(x1, y1, x2, y2) {
 
 function reset(){
   clear();
-  createCanvas(400, 400);
-  background(220);
+  canvas = createCanvas(0.6 * windowWidth, 0.94 * windowHeight);
+  background(251, 238, 193);
   for(let i=0; i<grid.length; i++){
     grid[i].reset();
     grid[i].show();

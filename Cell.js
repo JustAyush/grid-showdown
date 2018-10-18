@@ -96,9 +96,9 @@ class Cell {
   IsEnclosed(p1, p2) {
     if (this.line[0] == true && this.line[1] == true && this.line[2] == true && this.line[3] == true) {
       if (p1 == false && p2 == true)
-        fill(255, 0, 255);
+        fill(141, 135, 65);
       if (p1 == true && p2 == false)
-        fill(0, 255, 255);
+        fill(230, 153, 0);
       rect(this.x, this.y, this.w, this.w);
       return true;
     }

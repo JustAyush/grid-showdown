@@ -4,6 +4,9 @@
   <script src="libraries/p5.min.js"></script>
   <script src="libraries/p5.dom.min.js"></script>
   <script src="libraries/p5.sound.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
   <meta charset="utf-8">
   <script src="sketch.js"></script>
@@ -12,12 +15,32 @@
 
 <body>
   <div class="scorecard">
-    <p id="p1Score"> </p>
-    <p id="p2Score"> </p>
+    <div class="score">
+      <p> Scoreboard</p>
+      <p id="p1Score"> </p>
+      <p id="p2Score"> </p>
+    </div>
   </div>
 
-  <button id="start" onclick="reset();"> Start </button>
-  <p id="msgPlayer"> </p>
+  <div class="playerSelect">
+    <p id="msgPlayer"> </p>
+  </div>
+    <p style="text-align: center; font-size:60px; font-weight: bold; margin-top: 30px; color: white;"> Fill Your Box </p>
+
+
+	<!-- Modal -->
+	<div class="modal right fade text-center" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" data-backdrop="static" data-keyboard="false" >
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+          <p id="winningmsg" style="color: white;"> </p>
+					<button  type="button" class="btn btn-primary btn-lg" id="start" onclick="reset();" data-toggle="modal" data-target="#myModal2"> Play Again </button>
+				</div>
+			</div><!-- modal-content -->
+		</div><!-- modal-dialog -->
+	</div><!-- modal -->
+
+
 
 
 
